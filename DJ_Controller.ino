@@ -1,5 +1,5 @@
 // Encoder
-/
+
 #include <Encoder.h>
 Encoder myEnc(33, 35);
 int newPosition = 0;
@@ -208,12 +208,6 @@ void checkEncoder() {
   newCCValEnc = map(newCCValEnc, 0, 1023, 0, 127);
   encPosition = newCCValEnc;
   newPosition = myEnc.read();
-
-  //every time you click the thing forward or backwards one click
-  //it does four switching actions... which annoyingly sets the position
-  //forward or backwards by 4, not 1.  So you check for when its position
-  //moves up or down by 4, and that's one click forward or backwards.
-
   if (newPosition >= oldPosition + 4) {
     oldPosition = newPosition;
     usefulVal = oldPosition / 4;
@@ -226,12 +220,6 @@ void checkEncoder() {
     usbMIDI.sendControlChange(ccChannel2, -(encPosition), 1);
   }
   newPosition2 = myEnc2.read();
-
-  //every time you click the thing forward or backwards one click
-  //it does four switching actions... which annoyingly sets the position
-  //forward or backwards by 4, not 1.  So you check for when its position
-  //moves up or down by 4, and that's one click forward or backwards.
-
   if (newPosition2 >= oldPosition2 + 4) {
     oldPosition2 = newPosition2;
     usefulVal2 = oldPosition2 / 4;
